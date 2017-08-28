@@ -1,18 +1,12 @@
-# eTextile-matrix-sensor / E256-Blob / Arduino
+# eTextile-matrix-sensor / E256 / Arduino
 
 ### Transforming textiles into an intuitive way to interact with computers. This project is part of an electronic textiles research on HCI gesture interaction that was started in 2005.
-
-- Author/developer: Maurin Donneaud <maurin@etextile.org> - Industrial designer
-- Repository: https://github.com/eTextile/resistiveMatrix/tree/E256
-- Project web page: www.eTextile.org
-- License: CC-BY-SA (see the License file)
 
 ## Requirements
 - E256 eTextile-matrix-sensor
 - Arduino IDE
 - Arduino library
   - PacketSerial: https://github.com/bakercp/PacketSerial
-  - LinkedList: https://github.com/ivanseidel/LinkedList
 
 ### Settings for Arduino IDE
 - Board:           Arduino UNO
@@ -31,10 +25,6 @@ The blobs coordinates are transmit via OSC/
 // DATA_PIN -> SPI:MOSI -> D11 // Pin connected to Data in (DS) of the firdt 74HC595 8-BIT shift register
 // CLOCK_PIN -> SPI:SCK -> D13 // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
 // LATCH_PIN -> SPI:SS -> D10  // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
-
-## Data Transmission
-
-![alt tag](http://etextile-summercamp.org/swatch-exchange/wp-content/uploads/2015/05/Matrix_011.png)
 
 # E256 PIN MAPPING
 
@@ -131,9 +121,5 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
 - ROW_14 -> Y0 : 00001000 -> HEX 0x8
 - ROW_15 -> Y3 : 01101000 -> HEX 0x68
 
-
 ## TODO
-- Add blob detection
- - Fork OpenMV : https://github.com/openmv/openmv
- - ...
-- Add TUIO serveur
+- Add synchronous dual ADC sampling : https://github.com/pedvide/ADC/blob/master/examples/synchronizedMeasurements/synchronizedMeasurements.ino
