@@ -67,26 +67,4 @@ void loop() {
 
 }
 
-void Calibrate( uint8_t id, int val, int frame[] ) {
-  static int calibrationCounter = 0;
-
-  frame[id] += val;
-  calibrationCounter++;
-  if (calibrationCounter >= CALIBRATION_CYCLES * ROW_FRAME) {
-    for (int i = 0; i < ROW_FRAME; i++) {
-      frame[i] = frame[i] / CALIBRATION_CYCLES;
-    }
-    calibrationCounter = 0;
-  }
-  calibration = false;
-}
-
-// This is our packet callback.
-// The buffer is delivered already decoded.
-void onPacket(const uint8_t* buffer, size_t size) {
-  // The send() method will encode the buffer
-  // as a packet, set packet markers, etc.
-  serial.send(myPacket, ROW_FRAME);
-  scan = true;
-}
 

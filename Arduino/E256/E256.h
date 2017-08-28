@@ -2,9 +2,8 @@
 #define __E256_H__
 
 #include <SPI.h>
-#include <PacketSerial.h>
 
-PacketSerial serial;
+#include <PacketSerial.h>
 /*
   PACKET SERIAL : Copyright (c) 2012-2014 Christopher Baker <http://christopherbaker.net>
   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,6 +24,12 @@ PacketSerial serial;
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
 */
+PacketSerial serial;
+
+// Teensy 3.1 - SPI PINS : https://www.pjrc.com/teensy/td_libs_SPI.html
+// DATA_PIN -> SPI:MOSI -> D11 // Pin connected to Data in (DS) of the firdt 74HC595 8-BIT shift register
+// CLOCK_PIN -> SPI:SCK -> D13 // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
+// LATCH_PIN -> SPI:SS -> D10  // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
 
 // Control pins to send values to the 8-BITs shift registers used on the E-256 PCB
 // shiftOut using SPI library : https://forum.arduino.cc/index.php?topic=52383.0
@@ -32,8 +37,6 @@ PacketSerial serial;
 // DATA_PIN -> SPI:MOSI -> D11 // Pin connected to Data in (DS) of the firdt 74HC595 8-BIT shift register
 // CLOCK_PIN -> SPI:SCK -> D13 // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
 // LATCH_PIN -> SPI:SS -> D10  // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
-
-// Teensy - SPI PINS https://www.pjrc.com/teensy/td_libs_SPI.html
 
 #define  BAUD_RATE            230400
 #define  COLS                 16
@@ -68,5 +71,28 @@ const byte setRows[ROWS] = {
   0x85, 0x87, 0x83, 0x81, 0x82, 0x84, 0x80, 0x86,
   0x58, 0x78, 0x38, 0x18, 0x28, 0x48, 0x8, 0x68
 };
+
+//////////////////////////// Fonctons
+void Calibrate( uint8_t id, int val, int frame[] ) {
+  static int calibrationCounter = 0;
+
+  frame[id] += val;
+  calibrationCounter++;
+  if (calibrationCounter >= CALIBRATION_CYCLES * ROW_FRAME) {
+    for (int i = 0; i < ROW_FRAME; i++) {
+      frame[i] = frame[i] / CALIBRATION_CYCLES;
+    }
+    calibrationCounter = 0;
+  }
+  calibration = false;
+}
+
+// This is our packet callback, the buffer is delivered already decoded.
+void onPacket(const uint8_t* buffer, size_t size) {
+  // The send() method will encode the buffer
+  // as a packet, set packet markers, etc.
+  serial.send(myPacket, ROW_FRAME);
+  scan = true;
+}
 
 #endif // __E256_H__
