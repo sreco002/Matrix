@@ -2,10 +2,6 @@
 
 #include "E256.h"
 
-image_t image;
-list_t blobOut;
-rectangle_t roi;
-
 ////////////////////////////////////// SETUP
 void setup() {
 
@@ -17,14 +13,6 @@ void setup() {
   SPI.transfer(0xFFFFFF);   // All OFF
   digitalWrite(SS, LOW);    // set latchPin LOW
   digitalWrite(SS, HIGH);   // set latchPin HIGH
-
-  S.numCols = COLS;
-  S.numRows = ROWS;
-  S.pData = &inputVals[0];
-
-  image.w = COLS * SCALE;
-  image.h = ROWS * SCALE;
-  image.pixels = &bilinIntOutput[0];
 }
 
 ////////////////////////////////////// LOOP
@@ -70,20 +58,6 @@ void loop() {
     scan = false;
   }
 
-  bilinearInterpolation(1 / SCALE);
-
-  // list_t *out, image_t *ptr, rectangle_t *roi, unsigned int x_stride, unsigned int y_stride,
-  // list_t *thresholds, bool invert, unsigned int area_threshold, unsigned int pixels_threshold,
-  // bool merge, int margin,
-  // bool (*threshold_cb)(void*, find_blobs_list_lnk_data_t*), void *threshold_cb_arg,
-  // bool (*merge_cb)(void*, find_blobs_list_lnk_data_t*, find_blobs_list_lnk_data_t*), void *merge_cb_arg
-  imlib_find_blobs(
-    &blobOut, &image, &roi, 1, 1,
-    //thresholds, 0, 6, 4,
-    //0, 0,
-    //...
-  );
-
   // The update() method attempts to read in
   // any incoming serial data and emits packets via
   // the user's onPacket(const uint8_t* buffer, size_t size)
@@ -116,13 +90,3 @@ void onPacket(const uint8_t* buffer, size_t size) {
   scan = true;
 }
 
-void bilinearInterpolation(float inc) {
-  float32_t posX, posY;
-  int pos = 0;
-
-  for (posX = 0; posX < ROWS; posX += inc) {
-    for (posY = 0; posY < COLS; posY += inc) {
-      bilinIntOutput[pos++] = arm_bilinear_interp_q7(&S, posX, posY);
-    }
-  }
-}
