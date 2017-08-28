@@ -38,15 +38,12 @@ PacketSerial serial;
 #define  BAUD_RATE            230400
 #define  COLS                 16
 #define  ROWS                 16
-#define  SCALE                4
 #define  ROW_FRAME            COLS*ROWS
-#define  NEW_FRAME            COLS*ROWS*SCALE
 #define  CALIBRATION_CYCLES   4
-#define  MIN_BLOB_PIX         4   // Only blobs that with more pixels than 4
+
 #define  A0_PIN               A0  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
 #define  A1_PIN               A1  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
 
-q7_t inputVals[ROW_FRAME] = {0};           // Array to store row input values
 int minVals[ROW_FRAME] = {0};              // Array to store smallest values
 uint8_t myPacket[ROW_FRAME] = {0};         // Array to store values to transmit
 
