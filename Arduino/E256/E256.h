@@ -47,26 +47,23 @@ PacketSerial serial;
 #define  A0_PIN               A0  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
 #define  A1_PIN               A1  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
 
-#define  DEBUG                true
-
 int minVals[ROW_FRAME] = {0};              // Array to store smallest values
 uint8_t myPacket[ROW_FRAME] = {0};         // Array to store values to transmit
 
 void onPacket(const uint8_t* buffer, size_t size);
 void calibrate(uint8_t id, int val, int frame);
-void bilinearInterpolation(float inc);
 
 boolean scan = true;
 boolean calibration = true;
 
-uint16_t byteA;
-uint16_t byteB;
-uint16_t byteC;
+uint8_t byteA;
+uint8_t byteB;
+uint8_t byteC;
 
 // Array to store all parameters used to configure the two shift registers
-const uint16_t setCols[COLS] = {
+const uint8_t setCols[COLS] = {
   0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1,
-  0x8000, 0x4000, 0x2000, 0x1000, 0x800, 0x400, 0x200, 0x100
+  0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1
 };
 
 // Array to store all parameters used to configure the two analog multiplexeurs
