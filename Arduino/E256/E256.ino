@@ -14,6 +14,8 @@ void setup() {
   pinMode(SS, OUTPUT);      // Set up slave mode
   digitalWrite(SS, LOW);    // set latchPin LOW
   digitalWrite(SS, HIGH);   // set latchPin HIGH
+
+  serial.send(myPacket, ROW_FRAME);
 }
 
 ////////////////////////////////////// LOOP
@@ -41,7 +43,6 @@ void loop() {
         digitalWrite(SS, HIGH); // Set latchPin HIGH
 
         int rowValue = analogRead(A0_PIN);  // Reding use to store analog inputs values
-        // if (DEBUG) Serial.print(rowValue), Serial.print(" ");
         byte sensorID = col * COLS + row;   // Calculate the unidimensional array index
 
         if (calibration) {
@@ -50,12 +51,8 @@ void loop() {
           uint8_t value = map(rowValue, minVals[sensorID], 1023, 0, 255);
           myPacket[sensorID] = value;
         }
-
       }
-      // if (DEBUG) Serial.println();
     }
-    // if (DEBUG) Serial.println();
-
     scan = false;
   }
 

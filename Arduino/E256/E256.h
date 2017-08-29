@@ -54,7 +54,7 @@ void onPacket(const uint8_t* buffer, size_t size);
 void calibrate(uint8_t id, int val, int frame);
 
 boolean scan = true;
-boolean calibration = true;
+boolean calibration = false;
 
 uint8_t byteA;
 uint8_t byteB;
