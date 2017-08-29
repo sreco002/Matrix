@@ -49,7 +49,7 @@ void loop() {
         if (calibration) {
           Calibrate(sensorID, rowValue, minVals);
         } else {
-          uint8_t value = map(rowValue, minVals[sensorID], 1024, 0, 255);
+          uint8_t value = map(rowValue, minVals[sensorID], 1023, 0, 255);
           myPacket[sensorID] = value;
         }
 

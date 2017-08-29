@@ -51,7 +51,12 @@ int minVals[ROW_FRAME] = {0};              // Array to store smallest values
 uint8_t myPacket[ROW_FRAME] = {0};         // Array to store values to transmit
 
 void onPacket(const uint8_t* buffer, size_t size);
+<<<<<<< Updated upstream:Arduino/E256/E256.h
 void calibrate(uint8_t* id, int val, int frame);
+=======
+void calibrate(uint8_t id, int val, int frame);
+void bilinearInterpolation(float inc);
+>>>>>>> Stashed changes:Arduino/eTextile_matrix_sensor_blob/eTextile_matrix_sensor_blob.h
 
 boolean scan = true;
 boolean calibration = true;
