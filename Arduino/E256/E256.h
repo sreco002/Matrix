@@ -47,32 +47,30 @@ PacketSerial serial;
 #define  A0_PIN               A0  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
 #define  A1_PIN               A1  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
 
+#define  DEBUG                true
+
 int minVals[ROW_FRAME] = {0};              // Array to store smallest values
 uint8_t myPacket[ROW_FRAME] = {0};         // Array to store values to transmit
 
 void onPacket(const uint8_t* buffer, size_t size);
-<<<<<<< Updated upstream:Arduino/E256/E256.h
-void calibrate(uint8_t* id, int val, int frame);
-=======
 void calibrate(uint8_t id, int val, int frame);
 void bilinearInterpolation(float inc);
->>>>>>> Stashed changes:Arduino/eTextile_matrix_sensor_blob/eTextile_matrix_sensor_blob.h
 
 boolean scan = true;
 boolean calibration = true;
 
-uint8_t byteC;
-uint8_t byteB;
-uint8_t byteA;
+uint16_t byteA;
+uint16_t byteB;
+uint16_t byteC;
 
 // Array to store all parameters used to configure the two shift registers
-const byte setCols[COLS] = {
+const uint16_t setCols[COLS] = {
   0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1,
-  0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1
+  0x8000, 0x4000, 0x2000, 0x1000, 0x800, 0x400, 0x200, 0x100
 };
 
 // Array to store all parameters used to configure the two analog multiplexeurs
-const byte setRows[ROWS] = {
+const uint8_t setRows[ROWS] = {
   0x85, 0x87, 0x83, 0x81, 0x82, 0x84, 0x80, 0x86,
   0x58, 0x78, 0x38, 0x18, 0x28, 0x48, 0x8, 0x68
 };
