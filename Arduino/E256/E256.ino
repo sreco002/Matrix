@@ -1,4 +1,4 @@
-// E-256 eTextile matrix sensor shield V2.0
+// eTextile matrix sensor - E-256 (shield V2.0)
 
 #include "E256.h"
 
