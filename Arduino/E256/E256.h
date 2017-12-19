@@ -2,8 +2,8 @@
 #define __E256_H__
 
 #include <SPI.h>
-
 #include <PacketSerial.h>
+
 /*
   PACKET SERIAL : Copyright (c) 2012-2014 Christopher Baker <http://christopherbaker.net>
   Permission is hereby granted, free of charge, to any person obtaining a copy
