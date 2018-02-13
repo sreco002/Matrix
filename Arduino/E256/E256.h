@@ -41,11 +41,16 @@ PacketSerial serial;
 #define  BAUD_RATE            230400
 #define  COLS                 16
 #define  ROWS                 16
+#define  DUAL_COLS            8
+#define  DUAL_ROWS            8
 #define  ROW_FRAME            COLS*ROWS
+#define  ROW_FRAME_2          (COLS*ROWS)/2
 #define  CALIBRATION_CYCLES   4
 
-#define  A0_PIN               A0  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
-#define  A1_PIN               A1  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
+#define  PIN_A9               A9  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
+#define  PIN_A3               A3  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
+
+#define DUAL_ADC
 
 int minVals[ROW_FRAME] = {0};              // Array to store smallest values
 uint8_t myPacket[ROW_FRAME] = {0};         // Array to store values to transmit
@@ -60,16 +65,24 @@ uint8_t byteA;
 uint8_t byteB;
 uint8_t byteC;
 
-// Array to store all parameters used to configure the two shift registers
+// Array to store all parameters used to configure the two OUTPUT shift registers
 const uint8_t setCols[COLS] = {
   0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1,
   0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1
 };
-
-// Array to store all parameters used to configure the two analog multiplexeurs
+// Array to store parameters used to configure the two analog multiplexeurs
 const uint8_t setRows[ROWS] = {
   0x85, 0x87, 0x83, 0x81, 0x82, 0x84, 0x80, 0x86,
   0x58, 0x78, 0x38, 0x18, 0x28, 0x48, 0x8, 0x68
+};
+
+// Array to store parameters used to configure the two OUTPUT shift registers
+const uint16_t dualSetCols[COLS] = {
+  0x8080, 0x4040, 0x2020, 0x1010, 0x88, 0x44, 0x22, 0x11
+};
+// Array to store all parameters used to configure the two analog multiplexeurs
+const uint8_t dualSetRows[ROWS] = {
+  0x55, 0x77, 0x33, 0x11, 0x22, 0x44, 0x0, 0x66
 };
 
 //////////////////////////// Fonctons
