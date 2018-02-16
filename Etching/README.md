@@ -1,14 +1,12 @@
 # eTextile matrix sensor - E256 / Etching
 
 ### Transforming textiles into an intuitive way to interact with computers. This project is part of an electronic textiles research on HCI gesture interaction that was started in 2005.
-
-- Author/developer: Maurin Donneaud <maurin@etextile.org>
-- Repository: https://github.com/eTextile/resistiveMatrix/tree/E256
-- Project web page: www.eTextile.org
-- License: CC-BY-SA (see the License file)
-
-As part of a research on pressure sensitive textile matrices, we developed a new technique to improve the accuracy of the sensor. Composed of conductive strips arranged as grids, the sensor resolution is limited to 256 physicals sensors (16 by 16 matrix). To have a sensor of a convenient size (e.g. the width of the shoulders), the limited amount of stripes makes them a bit thicker than a finger width. This limitation makes the inter-strips gaps perceivable when sliding on the sensor. A physical interpolation between each of the conductive lines in the sensor matrix should fix this problem.
-We thus experimented different patterns of conductive strips such as zigzag or sine wave shapes , and this work illustrates the current state of our exploration.
+As part of a research on pressure sensitive textile matrices, we developed a new technique to improve the accuracy of the sensor.
+Composed of conductive strips arranged as grids, the sensor resolution is limited to 256 physicals sensors (16 by 16 matrix).
+To have a sensor of a convenient size (e.g. the width of the shoulders), the limited amount of stripes makes them a bit thicker than a finger width.
+This limitation makes the inter-strips gaps perceivable when sliding on the sensor.
+A physical interpolation between each of the conductive lines in the sensor matrix should fix this problem.
+We thus experimented different patterns of conductive strips such as zigzag or sine wave shapes, and this work illustrates the current state of our exploration.
 
 - References/Inspirations: Mili Tharakan et Hannah Perner-Wilson http://etextile-summercamp.org/2013/?p=596
 - Materials:
