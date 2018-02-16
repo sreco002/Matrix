@@ -10,7 +10,7 @@ The E256 eTextile matrix sensor is a development kit for designers, makers and c
 This kit features 30cm by 30cm sensitive textile that allow multi touch sensing and pressures topographic analysis.
 This textile sensor can be connected to any microcontrollers with ADC capabilities.
 The electronic hardware and all the software are fully open source.
-The demo codes are available for Arduino and Teensy MCUs.
+The demo codes are available for Teensy MCUs.
 We will soon release a BLE demo to interface this textile matrix sensor with any mobile devices.
 Made out of conductive textile shaped in rows and columns and a layer of piezoresistive fabric, this textile sensor is designed to be easy to make.
 The demo software perform a real time 3D visualization of all pressure applied onto the fabric sensor.
@@ -18,17 +18,16 @@ This software analyses the touch to trigger OSC messages that can be used in aud
 From the beginning this project stimulates the development of technologies in artistic use cases: playing music, combine graphics and sound, imagine objects that can have tactile properties, etc.
 
 ## Project content
-- DIY eTextile sensor: see the Etching file tutorial
-- PCB/shield that can connect with all Arduino compatible boards: see the Upverter file
-- Arduino firmware: work with all Arduino compatible boards and Teensy!
-- OpenFrameworks software: real time 3D visualization and OSC communication
+- **DIY eTextile sensor**: see the HOWTO.pdf (FIXME)
+- **E256 shield** PCB for Teensy 3.1 & 3.2 MCU
+- **Arduino firmware**: work with Teensy 3.1 & 3.2 boards
 
 ## Publications
 - [NIME17](http://www.nime2017.org/) - Designing a Multi-Touch eTextile for Music Performances / [Paper](https://etextile.github.io/resistiveMatrix/publications/NIME17-eTextile.pdf) - [Video](https://vimeo.com/217690743)
 - [MOCO17](http://moco17.movementcomputing.org/) - Music Skin: Fabric Interface for Expressive Music Control / [Paper](https://etextile.github.io/resistiveMatrix/publications/MOCO17-MusicSkin.pdf)
 
 ## Kit Ordering
-If you want a sensor just drop me an eMail at contact@eTextile.org
+If you want a sensor just drop me an eMail at matrix@eTextile.org
 I make all sensors bay hand. It take one or two days to make it and send it by post.
 All sensors are tested before shipping.
 If you have any mistake I will help you to fix it or replace the sensor.
