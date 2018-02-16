@@ -3,13 +3,13 @@
 ### Transforming textiles into an intuitive way to interact with computers. This project is part of an electronic textiles research on HCI gesture interaction that was started in 2005.
 
 ## Requirements
-- E256 eTextile-matrix-sensor
+- E256 shield
 - Arduino IDE
-- Arduino library
+- Extra Arduino library
   - PacketSerial: https://github.com/bakercp/PacketSerial
 
 ### Settings for Arduino IDE
-- Board:           Teensy 3.1 - 3.2
+- Board:           Teensy 3.1-3.2
 - USB Type:        Serial
 
 ## Program Synopsis
@@ -17,15 +17,14 @@
 - The sketch implemant rows and columns scaning algorithm.
 - The sketch implemant synchronous dual ADC sampling
 
-    // Control pins to send values to the 8-BITs shift registers used on the E-256 PCB
-    // ShiftOut using SPI library : https://forum.arduino.cc/index.php?topic=52383.0
-    // Arduino UNO - SPI PINS
-    // DATA_PIN -> SPI:MOSI -> D11 // Pin connected to Data in (DS) of the firdt 74HC595 8-BIT shift register
-    // CLOCK_PIN -> SPI:SCK -> D13 // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
-    // LATCH_PIN -> SPI:SS -> D10  // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
+## SPI PINS
+Control pins to send values to the 8-BITs shift registers used on the E-256 shield
+
+    DATA_PIN -> SPI:MOSI -> D11 (Teensy 3.1-3.2) // Pin connected to Data in (DS) of the first 74HC595 8-BIT shift register
+    CLOCK_PIN -> SPI:SCK -> D13 (Teensy 3.1-3.2) // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
+    LATCH_PIN -> SPI:SS -> D10  (Teensy 3.1-3.2) // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
 
 # E256 PIN MAPPING
-
 COLS = Two 8_Bits shift registers connected directly to the matrix columns
 ROWS = One 8_Bits shift register connected to two analog multiplexers that sens the matrix rows
 
@@ -100,7 +99,7 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
 - COL_6 -> Q1 : 00000010 -> HEX 0x2
 - COL_7 -> Q0 : 00000001 -> HEX 0x1
 
-### Byte_A
+### Byte_A 
 - ROW_0 -> Y5 : 10000101 -> HEX 0x85
 - ROW_1 -> Y7 : 10000111 -> HEX 0x87
 - ROW_2 -> Y6 : 10000011 -> HEX 0x83
@@ -120,6 +119,6 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
 - ROW_15 -> Y3 : 01101000 -> HEX 0x68
 
 ## TODO
-- Interpolated the 16X16 matrix to 64X64 with bilinear algorithm.
-- Applied blob tracking on to the interpolated matrix
+- Interpolated the 16X16 matrix to 64X64 with bilinear algorithm. (see Blob branche)
+- Applied blob tracking on to the interpolated matrix (see Blob branche)
 - Transmit blobs coordinates via OSC
