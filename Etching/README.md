@@ -1,6 +1,8 @@
-# eTextile matrix sensor - E256 / Etching
+# eTextile matrix sensor - E256 / HOWTO
 
 ### Transforming textiles into an intuitive way to interact with computers. This project is part of an electronic textiles research on HCI gesture interaction that was started in 2005.
+
+## Etching technique
 As part of a research on pressure sensitive textile matrices, we developed a new technique to improve the accuracy of the sensor.
 Composed of conductive strips arranged as grids, the sensor resolution is limited to 256 physicals sensors (16 by 16 matrix).
 To have a sensor of a convenient size (e.g. the width of the shoulders), the limited amount of stripes makes them a bit thicker than a finger width.
