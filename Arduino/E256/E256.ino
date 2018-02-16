@@ -21,42 +21,25 @@ void setup() {
   digitalWrite(SS, LOW);    // set latchPin LOW
   digitalWrite(SS, HIGH);   // set latchPin HIGH
 
-  ///// ADC_0 SETUP ////
-  // reference can be ADC_REFERENCE::REF_3V3, ADC_REFERENCE::REF_1V2 (not for Teensy LC) or ADC_REFERENCE::REF_EXT.
-  //adc->setReference(ADC_REFERENCE::REF_1V2, ADC_0); // change all 3.3 to 1.2 if you change the reference to 1V2
-
-  adc->setAveraging(1, ADC_0); // set number of averages
-  adc->setResolution(8, ADC_0); // set bits of resolution
-
-  // it can be any of the ADC_CONVERSION_SPEED enum: VERY_LOW_SPEED, LOW_SPEED, MED_SPEED, HIGH_SPEED_16BITS, HIGH_SPEED or VERY_HIGH_SPEED
-  // see the documentation for more information
-  // additionally the conversion speed can also be ADACK_2_4, ADACK_4_0, ADACK_5_2 and ADACK_6_2,
-  // where the numbers are the frequency of the ADC clock in MHz and are independent on the bus speed.
-  adc->setConversionSpeed(ADC_CONVERSION_SPEED::HIGH_SPEED); // change the conversion speed
-  // it can be any of the ADC_MED_SPEED enum: VERY_LOW_SPEED, LOW_SPEED, MED_SPEED, HIGH_SPEED or VERY_HIGH_SPEED
-  adc->setSamplingSpeed(ADC_SAMPLING_SPEED::HIGH_SPEED); // change the sampling speed
-
+  ///// SETUP ADC_0 ////
+  adc->setAveraging(1, ADC_0);                                        // Set number of averages
+  adc->setResolution(8, ADC_0);                                       // Set bits of resolution
+  adc->setConversionSpeed(ADC_CONVERSION_SPEED::HIGH_SPEED, ADC_0);   // Change the conversion speed
+  adc->setSamplingSpeed(ADC_SAMPLING_SPEED::HIGH_SPEED, ADC_0);       // Change the sampling speed
   // always call the compare functions after changing the resolution!
-  //adc->enableCompare(1.0/3.3*adc->getMaxValue(ADC_0), 0, ADC_0); // measurement will be ready if value < 1.0V
+  adc->enableCompare(1.0/3.3*adc->getMaxValue(ADC_0), 0, ADC_0);      // measurement will be ready if value < 1.0V
   //adc->enableCompareRange(1.0*adc->getMaxValue(ADC_0)/3.3, 2.0*adc->getMaxValue(ADC_0)/3.3, 0, 1, ADC_0); // ready if value lies out of [1.0,2.0] V
 
-  // If you enable interrupts, notice that the isr will read the result, so that isComplete() will return false (most of the time)
-  //adc->enableInterrupts(ADC_0);
-
-  ////// ADC_1 SETUP /////
-  adc->setAveraging(1, ADC_1); // set number of averages
-  adc->setResolution(8, ADC_1); // set bits of resolution
-  adc->setConversionSpeed(ADC_CONVERSION_SPEED::HIGH_SPEED, ADC_1); // change the conversion speed
-  adc->setSamplingSpeed(ADC_SAMPLING_SPEED::HIGH_SPEED, ADC_1); // change the sampling speed
-
-  //adc->setReference(ADC_REFERENCE::REF_1V2, ADC_1);
-
+  ////// SETUP ADC_1 /////
+  adc->setAveraging(1, ADC_1);                                        // set number of averages
+  adc->setResolution(8, ADC_1);                                       // set bits of resolution
+  adc->setConversionSpeed(ADC_CONVERSION_SPEED::HIGH_SPEED, ADC_1);   // change the conversion speed
+  adc->setSamplingSpeed(ADC_SAMPLING_SPEED::HIGH_SPEED, ADC_1);       // change the sampling speed
   // always call the compare functions after changing the resolution!
-  //adc->enableCompare(1.0/3.3*adc->getMaxValue(ADC_1), 0, ADC_1); // measurement will be ready if value < 1.0V
+  adc->enableCompare(1.0/3.3*adc->getMaxValue(ADC_1), 0, ADC_1);      // measurement will be ready if value < 1.0V
   //adc->enableCompareRange(1.0*adc->getMaxValue(ADC_1)/3.3, 2.0*adc->getMaxValue(ADC_1)/3.3, 0, 1, ADC_1); // ready if value lies out of [1.0,2.0] V
 
   adc->startSynchronizedContinuous(PIN_A9, PIN_A3);
-
   serial.send(myPacket, ROW_FRAME);
 }
 
