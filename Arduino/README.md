@@ -3,19 +3,21 @@
 ### Transforming textiles into an intuitive way to interact with computers. This project is part of an electronic textiles research on HCI gesture interaction that was started in 2005.
 
 ## Requirements
+- Teensy 3.1-3.2 
 - E256 shield
 - Arduino IDE
 - Extra Arduino library
   - PacketSerial: https://github.com/bakercp/PacketSerial
 
 ### Settings for Arduino IDE
-- Board:           Teensy 3.1-3.2
-- USB Type:        Serial
+- Board:       Teensy 3.1-3.2
+- USB Type:    Serial
+- CPU speed    120 Mhz (overclock)
 
 ## Program Synopsis
-- The Teensy communicate with the E256 PCB via SPI (Hardware).
+- The Teensy communicate with the E256 shield via SPI (Hardware).
 - The sketch implemant rows and columns scaning algorithm.
-- The sketch implemant synchronous dual ADC sampling
+- The sketch implemant synchronous dual ADC sampling.
 
 ## SPI PINS
 Control pins to send values to the 8-BITs shift registers used on the E-256 shield
@@ -119,6 +121,6 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
 - ROW_15 -> Y3 : 01101000 -> HEX 0x68
 
 ## TODO
-- Interpolated the 16X16 matrix to 64X64 with bilinear algorithm. (see Blob branche)
-- Applied blob tracking on to the interpolated matrix (see Blob branche)
+- Interpolated the 16X16 matrix to 64X64 with bilinear algorithm. (See the Blob branche)
+- Applied blob tracking on to the interpolated matrix (See the Blob branche)
 - Transmit blobs coordinates via OSC
