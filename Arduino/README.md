@@ -27,8 +27,8 @@ Control pins to send values to the 8-BITs shift registers used on the E-256 shie
     LATCH_PIN -> SPI:SS -> D10  (Teensy 3.1-3.2) // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
 
 # E256 PIN MAPPING
-COLS = Two 8_Bits shift registers connected directly to the matrix columns
-ROWS = One 8_Bits shift register connected to two analog multiplexers that sens the matrix rows
+- COLS = Two 8_Bits shift registers connected directly to the matrix columns
+- ROWS = One 8_Bits shift register connected to two analog multiplexers that sens the matrix rows
 
 ## Shift register_0
     Q0 -> SO_A  // Pin Q0 connected to Analog MUX_A pin S0
