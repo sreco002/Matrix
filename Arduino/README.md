@@ -31,7 +31,6 @@ COLS = Two 8_Bits shift registers connected directly to the matrix columns
 ROWS = One 8_Bits shift register connected to two analog multiplexers that sens the matrix rows
 
 ## Shift register_0
-
     Q0 -> SO_A  // Pin Q0 connected to Analog MUX_A pin S0
     Q1 -> S1_A  // Pin Q1 connected to Analog MUX_A pin S1
     Q2 -> S2_A  // Pin Q2 connected to Analog MUX_A pin S2
@@ -42,7 +41,6 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
     Q7 -> EN_B  // Pin Q7 connected to Analog MUX_A pin Enable (active LOW)
 
 ### Analog MUX_A
-
     Y0 -> ROW_6 // Pin Y0 connected to ROW 6
     Y1 -> ROW_5 // Pin Y1 connected to ROW 5
     Y2 -> ROW_4 // Pin Y2 connected to ROW 4
@@ -52,9 +50,7 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
     Y6 -> ROW_2 // Pin Y6 connected to ROW 2
     Y7 -> ROW_1 // Pin Y7 connected to ROW 1
 
-
-### Analog MUX_B
-
+### Analog MUX_B
     Y0 -> ROW_14 // Pin Y0 connected to ROW 14
     Y1 -> ROW_13 // Pin Y1 connected to ROW 13
     Y2 -> ROW_12 // Pin Y2 connected to ROW 12
@@ -65,7 +61,6 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
     Y7 -> ROW_9  // Pin Y7 connected to ROW 9
 
 ## Shift register_1
-
     Q0 -> COL_7  // Pin Q0 connected to column 7
     Q1 -> COL_6  // Pin Q1 connected to column 6
     Q2 -> COL_5  // Pin Q2 connected to column 5
@@ -76,7 +71,6 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
     Q7 -> COL_0  // Pin Q7 connected to column 0
 
 ## Shift register_2
-
     Q0 -> COL_15  // Pin Q0 connected to column 15
     Q1 -> COL_14  // Pin Q1 connected to column 14
     Q2 -> COL_13  // Pin Q2 connected to column 13
@@ -89,7 +83,6 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
 ## Bytes to achieve the matrix scanning
 
 ### Byte_C
-
     COL_8 ->  Q7 : 10000000 -> HEX 0x80
     COL_9 ->  Q6 : 01000000 -> HEX 0x40
     COL_10 -> Q5 : 00100000 -> HEX 0x20
@@ -100,7 +93,6 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
     COL_15 -> Q0 : 00000001 -> HEX 0x1
 
 ### Byte_B
-
     COL_0 -> Q7 : 10000000 -> HEX 0x80
     COL_1 -> Q6 : 01000000 -> HEX 0x40
     COL_2 -> Q5 : 00100000 -> HEX 0x20
@@ -110,8 +102,7 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
     COL_6 -> Q1 : 00000010 -> HEX 0x2
     COL_7 -> Q0 : 00000001 -> HEX 0x1
 
-### Byte_A 
-
+### Byte_A
     ROW_0 -> Y5 : 10000101 -> HEX 0x85
     ROW_1 -> Y7 : 10000111 -> HEX 0x87
     ROW_2 -> Y6 : 10000011 -> HEX 0x83
