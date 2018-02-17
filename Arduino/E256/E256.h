@@ -31,12 +31,8 @@ PacketSerial serial;
 // CLOCK_PIN -> SPI:SCK -> D13 // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
 // LATCH_PIN -> SPI:SS -> D10  // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
 
-// Control pins to send values to the 8-BITs shift registers used on the E-256 PCB
+// Control pins to send values to the 8-BITs shift registers used on the E-256 shield
 // shiftOut using SPI library : https://forum.arduino.cc/index.php?topic=52383.0
-// Arduino UNO - SPI PINS
-// DATA_PIN -> SPI:MOSI -> D11 // Pin connected to Data in (DS) of the firdt 74HC595 8-BIT shift register
-// CLOCK_PIN -> SPI:SCK -> D13 // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
-// LATCH_PIN -> SPI:SS -> D10  // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
 
 #define  BAUD_RATE            230400
 #define  COLS                 16
@@ -50,55 +46,14 @@ PacketSerial serial;
 #define  PIN_A9               A9  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
 #define  PIN_A3               A3  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
 
-#define DUAL_ADC
-
-int minVals[ROW_FRAME] = {0};              // Array to store smallest values
 uint8_t myPacket[ROW_FRAME] = {0};         // Array to store values to transmit
 
 void onPacket(const uint8_t* buffer, size_t size);
-void calibrate(uint8_t id, int val, int frame);
 
-boolean scan = true;
-boolean calibration = false;
-
-uint8_t byteA;
-uint8_t byteB;
-uint8_t byteC;
-
-// Array to store all parameters used to configure the two OUTPUT shift registers
-const uint8_t setCols[COLS] = {
-  0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1,
-  0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1
-};
-// Array to store parameters used to configure the two analog multiplexeurs
-const uint8_t setRows[ROWS] = {
-  0x85, 0x87, 0x83, 0x81, 0x82, 0x84, 0x80, 0x86,
-  0x58, 0x78, 0x38, 0x18, 0x28, 0x48, 0x8, 0x68
-};
-
-// Array to store parameters used to configure the two OUTPUT shift registers
-const uint16_t dualSetCols[COLS] = {
-  0x8080, 0x4040, 0x2020, 0x1010, 0x88, 0x44, 0x22, 0x11
-};
 // Array to store all parameters used to configure the two analog multiplexeurs
 const uint8_t dualSetRows[ROWS] = {
   0x55, 0x77, 0x33, 0x11, 0x22, 0x44, 0x0, 0x66
 };
-
-//////////////////////////// Fonctons
-void Calibrate( uint8_t id, int val, int frame[] ) {
-  static int calibrationCounter = 0;
-
-  frame[id] += val;
-  calibrationCounter++;
-  if (calibrationCounter >= CALIBRATION_CYCLES * ROW_FRAME) {
-    for (int i = 0; i < ROW_FRAME; i++) {
-      frame[i] = frame[i] / CALIBRATION_CYCLES;
-    }
-    calibrationCounter = 0;
-  }
-  calibration = false;
-}
 
 // This is our packet callback, the buffer is delivered already decoded.
 void onPacket(const uint8_t* buffer, size_t size) {
