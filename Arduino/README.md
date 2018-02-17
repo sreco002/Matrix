@@ -50,6 +50,7 @@ ROWS = One 8_Bits shift register connected to two analog multiplexers that sens 
     Y6 -> ROW_2 // Pin Y6 connected to ROW 2
     Y7 -> ROW_1 // Pin Y7 connected to ROW 1
 
+
 ### Analog MUX_B
     Y0 -> ROW_14 // Pin Y0 connected to ROW 14
     Y1 -> ROW_13 // Pin Y1 connected to ROW 13
