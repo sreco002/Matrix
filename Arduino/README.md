@@ -14,21 +14,24 @@
 - USB Type:    Serial
 - CPU speed    120 Mhz (overclock)
 
+# Plug the E256
+| Teensy PIN (3.1-3.2) | E256 PIN | E256 componant                                       |
+| -------------------- | -------- | ---------------------------------------------------- |
+| ADC 3                | AN1      | OUTPUT of the 8:1 analog multiplexer                 |
+| GND                  | GND      | Ground                                               |
+| D13 (SPI:SCK)        | SCK      | 74HC595 clock pin (SH_CP)                            |
+| ADC 9                | AN0      | OUTPUT of the 8:1 analog multiplexer                 |
+| VCC                  | VCC      | 3.3 - 5.0V                                           |
+| D11 (SPI:MOSI)       | DS       | 74HC595 data input of the first 8-BIT shift register |
+| D10 (SPI:SS)         | RCK      | 74HC595 latch pin (ST_CP)                            |
+| GND                  | GND      | Ground                                               |
+
 ## Program Synopsis
 - The Teensy communicate with the E256 shield via SPI (Hardware).
 - The sketch implemant rows and columns scaning algorithm.
+  - COLS = Two 8_Bits shift registers connected directly to the matrix columns.
+  - ROWS = One 8_Bits shift register connected to two analog multiplexers that sens the matrix rows.
 - The sketch implemant synchronous dual ADC sampling.
-
-## SPI PINS
-Control pins to send values to the 8-BITs shift registers used on the E-256 shield
-
-    DATA_PIN -> SPI:MOSI -> D11 (Teensy 3.1-3.2) // Pin connected to Data in (DS) of the first 74HC595 8-BIT shift register
-    CLOCK_PIN -> SPI:SCK -> D13 (Teensy 3.1-3.2) // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
-    LATCH_PIN -> SPI:SS -> D10  (Teensy 3.1-3.2) // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
-
-# E256 PIN MAPPING
-- COLS = Two 8_Bits shift registers connected directly to the matrix columns
-- ROWS = One 8_Bits shift register connected to two analog multiplexers that sens the matrix rows
 
 ## Shift register_0
     Q0 -> SO_A  // Pin Q0 connected to Analog MUX_A pin S0
