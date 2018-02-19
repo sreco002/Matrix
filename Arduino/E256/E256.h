@@ -40,7 +40,7 @@ PacketSerial serial;
 #define  DUAL_COLS            8
 #define  DUAL_ROWS            8
 #define  ROW_FRAME            COLS*ROWS
-#define  ROW_FRAME_2          (COLS*ROWS)/2
+#define  DUAL_ROW_FRAME       (COLS*ROWS)/2    //128
 #define  CALIBRATION_CYCLES   4
 
 #define  PIN_A9               A9  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
@@ -52,7 +52,7 @@ void onPacket(const uint8_t* buffer, size_t size);
 
 // Array to store all parameters used to configure the two analog multiplexeurs
 const uint8_t dualSetRows[ROWS] = {
-  0x55, 0x77, 0x33, 0x11, 0x22, 0x44, 0x0, 0x66
+  0x55, 0x77, 0x33, 0x11, 0x22, 0x44, 0x00, 0x66
 };
 
 // This is our packet callback, the buffer is delivered already decoded.
