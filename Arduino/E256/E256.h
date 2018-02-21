@@ -32,11 +32,11 @@ PacketSerial serial;
 #define  DUAL_COLS            8
 #define  DUAL_ROWS            8
 #define  ROW_FRAME            COLS*ROWS
-#define  DUAL_ROW_FRAME       (COLS*ROWS)/2    //128
+#define  DUAL_ROW_FRAME       (COLS*ROWS)/2
 #define  CALIBRATION_CYCLES   4
 
-#define  PIN_A9               A9  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
-#define  PIN_A3               A3  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
+#define  A0_PIN               A9  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
+#define  A1_PIN               A3  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
 
 uint8_t myPacket[ROW_FRAME] = {0}; // Array to store values to transmit
 

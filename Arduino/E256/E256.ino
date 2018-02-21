@@ -8,8 +8,8 @@ ADC::Sync_result result;
 ////////////////////////////////////// SETUP
 void setup() {
 
-  pinMode(PIN_A9, INPUT);
-  pinMode(PIN_A3, INPUT);
+  pinMode(A0_PIN, INPUT);
+  pinMode(A1_PIN, INPUT);
 
   serial.setPacketHandler(&onPacket); // We must specify a packet handler method so that
   serial.begin(BAUD_RATE);  // Start the serial module
@@ -38,14 +38,14 @@ void setup() {
   adc->enableCompare(1.0 / 3.3 * adc->getMaxValue(ADC_1), 0, ADC_1);  // Measurement will be ready if value < 1.0V
   //adc->enableCompareRange(1.0*adc->getMaxValue(ADC_1)/3.3, 2.0*adc->getMaxValue(ADC_1)/3.3, 0, 1, ADC_1); // Ready if value lies out of [1.0,2.0] V
 
-  adc->startSynchronizedContinuous(PIN_A9, PIN_A3);
+  adc->startSynchronizedContinuous(A0_PIN, A1_PIN);
   serial.send(myPacket, ROW_FRAME);
 }
 
 ////////////////////////////////////// LOOP
 void loop() {
-  // Cols are digital OUTPUT
-  // Rows are analog INPUT
+  // Columns are digital OUTPUT PINS
+  // Rows are analog INPUT PINS
   // uint16_t setCols = 0x8080; // Powering two cols at a time (NOTGOOD) -> 1000 0000 1000 0000
   uint16_t setCols = 0x8000;    // We must powering one col at a time (GOOD) -> 1000 0000 0000 0000
   uint8_t index = 0;
@@ -59,13 +59,12 @@ void loop() {
       SPI.transfer(dualSetRows[row]);     // Shift out one byte that setup the two annalog multiplexeurs
       digitalWrite(SS, HIGH);             // Set latchPin HIGH
 
-      //result = adc->analogSynchronizedRead(PIN_A9, PIN_A3);
+      //result = adc->analogSynchronizedRead(A0_PIN, A1_PIN);
       result = adc->readSynchronizedContinuous();
-
+    
       myPacket[index] = result.result_adc0;
       myPacket[index + DUAL_ROW_FRAME] = result.result_adc1;
       index += 1;
-
     }
     setCols = setCols >> 1;
   }
