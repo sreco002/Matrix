@@ -44,32 +44,39 @@ void setup() {
 
 ////////////////////////////////////// LOOP
 void loop() {
-
+  // Cols are digital OUTPUT
+  // Rows are analog INPUT
   // uint16_t setCols = 0x8080; // Powering two cols at a time (NOTGOOD) -> 1000 0000 1000 0000
-  uint16_t setCols = 0x8000; // Powering one cols at a time (GOOD) -> 1000 0000 0000 0000
+  uint16_t setCols = 0x8000;    // We must powering one col at a time (GOOD) -> 1000 0000 0000 0000
+  uint8_t index = 0;
 
   for (uint8_t col = 0; col < COLS; col++) {
     for (uint8_t row = 0; row < DUAL_ROWS; row++) {
 
       digitalWrite(SS, LOW);              // Set latchPin LOW
-      SPI.transfer(lowByte(setCols));     // Shift out the terird byte
-      SPI.transfer(highByte(setCols));    // Shift out the secound byte
-      SPI.transfer(dualSetRows[row]);     // Shift out the first byte
+      SPI.transfer(lowByte(setCols));     // Shift out the MSB byte that set up the second shift register
+      SPI.transfer(highByte(setCols));    // Shift out the MSB byte that set up the first shift register
+      SPI.transfer(dualSetRows[row]);     // Shift out one byte that setup the two annalog multiplexeurs
       digitalWrite(SS, HIGH);             // Set latchPin HIGH
 
       //result = adc->analogSynchronizedRead(PIN_A9, PIN_A3);
       result = adc->readSynchronizedContinuous();
 
-      uint8_t index_A = col * COLS + row;                      // Compute the unidimensional array index_A (FIXME)
-      uint8_t index_B = col * COLS + row + DUAL_ROW_FRAME;     // Compute the unidimensional array index_B (FIXME)
-
-      myPacket[index_A] = result.result_adc0;     // Write ADC0 value to the unidimensional array
-      myPacket[index_B] = result.result_adc1;     // Write ADC1 value to the unidimensional array
+      myPacket[index] = result.result_adc0;
+      myPacket[index + DUAL_ROW_FRAME] = result.result_adc1;
+      index += 1;
 
     }
     setCols = setCols >> 1;
   }
   serial.update();
+}
+
+// This is our packet callback, the buffer is delivered already decoded.
+void onPacket(const uint8_t* buffer, size_t size) {
+  // The send() method will encode the buffer
+  // as a packet, set packet markers, etc.
+  serial.send(myPacket, ROW_FRAME);
 }
 
 

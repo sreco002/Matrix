@@ -6,7 +6,8 @@
 - Teensy 3.1-3.2 
 - E256 shield
 - Arduino IDE
-- Extra Arduino library
+- Additional Arduino librarys
+  - Teensyduino: https://www.pjrc.com/teensy/teensyduino.html
   - PacketSerial: https://github.com/bakercp/PacketSerial
 
 ### Settings for Arduino IDE
@@ -15,7 +16,7 @@
 - CPU speed    120 Mhz (overclock)
 
 # Plug the E256
-| Teensy PIN (3.1-3.2) | E256 PIN | E256 componant                                       |
+| Teensy PIN (3.1-3.2) | E256 PIN | E256 components                                      |
 | -------------------- | -------- | ---------------------------------------------------- |
 | ADC 3                | AN1      | OUTPUT of the 8:1 analog multiplexer                 |
 | GND                  | GND      | Ground                                               |
@@ -123,6 +124,10 @@
     ROW_13 -> Y1 : 01001000 -> HEX 0x48
     ROW_14 -> Y0 : 00001000 -> HEX 0x8
     ROW_15 -> Y3 : 01101000 -> HEX 0x68
+
+## REFs
+- ShiftOut using SPI library: https://forum.arduino.cc/index.php?topic=52383.0
+- PacketSerial: https://github.com/bakercp/PacketSerial
 
 ## TODO
 - Interpolated the 16X16 matrix to 64X64 with bilinear algorithm. (See the Blob branche)

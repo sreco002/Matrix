@@ -26,14 +26,6 @@
 */
 PacketSerial serial;
 
-// Teensy 3.1 - SPI PINS : https://www.pjrc.com/teensy/td_libs_SPI.html
-// DATA_PIN -> SPI:MOSI -> D11 // Pin connected to Data in (DS) of the firdt 74HC595 8-BIT shift register
-// CLOCK_PIN -> SPI:SCK -> D13 // Pin connected to clock pin (SH_CP) of the first 74HC595 8-BIT shift register
-// LATCH_PIN -> SPI:SS -> D10  // Pin connected to latch pin (ST_CP) of the first 74HC595 8-BIT shift register
-
-// Control pins to send values to the 8-BITs shift registers used on the E-256 shield
-// shiftOut using SPI library : https://forum.arduino.cc/index.php?topic=52383.0
-
 #define  BAUD_RATE            230400
 #define  COLS                 16
 #define  ROWS                 16
@@ -46,7 +38,7 @@ PacketSerial serial;
 #define  PIN_A9               A9  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
 #define  PIN_A3               A3  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
 
-uint8_t myPacket[ROW_FRAME] = {0};         // Array to store values to transmit
+uint8_t myPacket[ROW_FRAME] = {0}; // Array to store values to transmit
 
 void onPacket(const uint8_t* buffer, size_t size);
 
@@ -54,13 +46,5 @@ void onPacket(const uint8_t* buffer, size_t size);
 const uint8_t dualSetRows[ROWS] = {
   0x55, 0x77, 0x33, 0x11, 0x22, 0x44, 0x00, 0x66
 };
-
-// This is our packet callback, the buffer is delivered already decoded.
-void onPacket(const uint8_t* buffer, size_t size) {
-  // The send() method will encode the buffer
-  // as a packet, set packet markers, etc.
-  serial.send(myPacket, ROW_FRAME);
-  scan = true;
-}
 
 #endif // __E256_H__
