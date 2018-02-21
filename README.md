@@ -35,7 +35,7 @@ If you have any mistake I will help you to fix it or replace the sensor.
 ## Copyright
 Except as otherwise noted, all files in the resistiveMatrix project folder
 
-    Copyright (c) 2005-2017 Maurin Donneaud and others.
+    Copyright (c) 2005-2018 Maurin Donneaud and others.
 
 For information on usage and redistribution, and for a DISCLAIMER OF ALL
 WARRANTIES, see LICENSE.txt included in the resistiveMatrix project folder.
