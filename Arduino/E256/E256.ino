@@ -23,21 +23,22 @@ void setup() {
   digitalWrite(SS, LOW);    // Set latchPin LOW
   digitalWrite(SS, HIGH);   // Set latchPin HIGH
   SPI.begin();              // Start the SPI module
+  SPI.beginTransaction(settings);
 
   ///// SETUP ADC_0 ////
-  adc->setAveraging(1, ADC_0);                                        // Set number of averages
-  adc->setResolution(8, ADC_0);                                       // Set bits of resolution
-  adc->setConversionSpeed(ADC_CONVERSION_SPEED::HIGH_SPEED, ADC_0);   // Set the conversion speed
-  adc->setSamplingSpeed(ADC_SAMPLING_SPEED::HIGH_SPEED, ADC_0);       // Set the sampling speed
+  adc->setAveraging(1, ADC_0);                                            // Set number of averages
+  adc->setResolution(8, ADC_0);                                           // Set bits of resolution
+  adc->setConversionSpeed(ADC_CONVERSION_SPEED::VERY_HIGH_SPEED, ADC_0);  // Set the conversion speed
+  adc->setSamplingSpeed(ADC_SAMPLING_SPEED::VERY_HIGH_SPEED, ADC_0);      // Set the sampling speed
   // always call the compare functions after changing the resolution!
-  adc->enableCompare(1.0 / 3.3 * adc->getMaxValue(ADC_0), 0, ADC_0);  // Measurement will be ready if value < 1.0V
+  adc->enableCompare(1.0 / 3.3 * adc->getMaxValue(ADC_0), 0, ADC_0);      // Measurement will be ready if value < 1.0V
   //adc->enableCompareRange(1.0*adc->getMaxValue(ADC_0)/3.3, 2.0*adc->getMaxValue(ADC_0)/3.3, 0, 1, ADC_0); // Ready if value lies out of [1.0,2.0] V
 
   ////// SETUP ADC_1 /////
-  adc->setAveraging(1, ADC_1);                                        // Set number of averages
-  adc->setResolution(8, ADC_1);                                       // Set bits of resolution
-  adc->setConversionSpeed(ADC_CONVERSION_SPEED::HIGH_SPEED, ADC_1);   // Set the conversion speed
-  adc->setSamplingSpeed(ADC_SAMPLING_SPEED::HIGH_SPEED, ADC_1);       // Set the sampling speed
+  adc->setAveraging(1, ADC_1);                                            // Set number of averages
+  adc->setResolution(8, ADC_1);                                           // Set bits of resolution
+  adc->setConversionSpeed(ADC_CONVERSION_SPEED::VERY_HIGH_SPEED, ADC_1);  // Set the conversion speed
+  adc->setSamplingSpeed(ADC_SAMPLING_SPEED::VERY_HIGH_SPEED, ADC_1);      // Set the sampling speed
   // always call the compare functions after changing the resolution!
   adc->enableCompare(1.0 / 3.3 * adc->getMaxValue(ADC_1), 0, ADC_1);  // Measurement will be ready if value < 1.0V
   //adc->enableCompareRange(1.0*adc->getMaxValue(ADC_1)/3.3, 2.0*adc->getMaxValue(ADC_1)/3.3, 0, 1, ADC_1); // Ready if value lies out of [1.0,2.0] V
@@ -64,15 +65,13 @@ void loop() {
   for (uint8_t col = 0; col < COLS; col++) {
     for (uint8_t row = 0; row < DUAL_ROWS; row++) {
 
-      // SPI.beginTransaction(settings);
       digitalWrite(SS, LOW);              // Set latchPin LOW
       SPI.transfer(lowByte(setCols));     // Shift out the MSB byte that set up the second shift register
       SPI.transfer(highByte(setCols));    // Shift out the MSB byte that set up the first shift register
       SPI.transfer(dualSetRows[row]);     // Shift out one byte that setup the two annalog multiplexeurs
       digitalWrite(SS, HIGH);             // Set latchPin HIGH
-      // SPI.endTransaction();
 
-      //result = adc->analogSynchronizedRead(A0_PIN, A1_PIN);
+      // result = adc->analogSynchronizedRead(A0_PIN, A1_PIN);
       result = adc->readSynchronizedContinuous();
 
       myPacket[index] = result.result_adc0;
@@ -80,8 +79,6 @@ void loop() {
       index += 1;
     }
     setCols = setCols >> 1;
-    // Serial.println(index);
-    // delay(10);
   }
   // serial.update();
   fps++;
