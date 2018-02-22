@@ -42,6 +42,9 @@ uint8_t myPacket[ROW_FRAME] = {0}; // Array to store values to transmit
 
 void onPacket(const uint8_t* buffer, size_t size);
 
+unsigned long lastFarme = 0;
+uint8_t fps = 0;
+
 // Array to store all parameters used to configure the two analog multiplexeurs
 const uint8_t dualSetRows[ROWS] = {
   0x55, 0x77, 0x33, 0x11, 0x22, 0x44, 0x00, 0x66
