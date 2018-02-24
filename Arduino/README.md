@@ -8,6 +8,8 @@
 - Arduino IDE
 - Additional Arduino librarys
   - Teensyduino: https://www.pjrc.com/teensy/teensyduino.html
+  - SPI: https://www.pjrc.com/teensy/td_libs_SPI.html
+  - ADC: https://github.com/pedvide/ADC (include in Teensyduino)
   - PacketSerial: https://github.com/bakercp/PacketSerial
 
 ### Settings for Arduino IDE
