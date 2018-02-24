@@ -14,6 +14,7 @@
 - Board:       Teensy 3.1-3.2
 - USB Type:    Serial
 - CPU speed    120 Mhz (overclock)
+- Optimize     Fastest
 
 # Plug the E256
 | Teensy PIN (3.1-3.2) | E256 PIN | E256 components                                      |
