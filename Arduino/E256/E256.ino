@@ -15,9 +15,9 @@ void setup() {
   pinMode(A0_PIN, INPUT);
   pinMode(A1_PIN, INPUT);
 
-  Serial.begin(BAUD_RATE);
-  // serial.setPacketHandler(&onPacket); // We must specify a packet handler method so that
-  // serial.begin(BAUD_RATE);  // Start the serial module
+  // Serial.begin(BAUD_RATE);
+  serial.setPacketHandler(&onPacket); // We must specify a packet handler method so that
+  serial.begin(BAUD_RATE);  // Start the serial module
 
   pinMode(SS, OUTPUT);      // Set up slave mode
   digitalWrite(SS, LOW);    // Set latchPin LOW
@@ -49,13 +49,13 @@ void setup() {
 
 ////////////////////////////////////// LOOP
 void loop() {
-
-  if ((millis() - lastFarme) >= 1000) {
-    Serial.printf(F("\nFPS: %d"), fps);
-    lastFarme = millis();
-    fps = 0;
-  }
-
+  /*
+    if ((millis() - lastFarme) >= 1000) {
+      Serial.printf(F("\nFPS: %d"), fps);
+      lastFarme = millis();
+      fps = 0;
+    }
+  */
   // Columns are digital OUTPUT PINS
   // Rows are analog INPUT PINS
   // uint16_t setCols = 0x8080; // Powering two cols at a time (NOTGOOD) -> 1000 0000 1000 0000
@@ -66,9 +66,9 @@ void loop() {
     for (uint8_t row = 0; row < DUAL_ROWS; row++) {
 
       digitalWrite(SS, LOW);              // Set latchPin LOW
-      SPI.transfer(lowByte(setCols));     // Shift out the MSB byte that set up the second shift register
-      SPI.transfer(highByte(setCols));    // Shift out the MSB byte that set up the first shift register
-      SPI.transfer(dualSetRows[row]);     // Shift out one byte that setup the two annalog multiplexeurs
+      SPI.transfer(lowByte(setCols));     // Shift out the LSB byte to set up the OUTPUT shift register
+      SPI.transfer(highByte(setCols));    // Shift out the MSB byte to set up the OUTPUT shift register
+      SPI.transfer(dualSetRows[row]);     // Shift out one byte that setup the two 8:1 analog multiplexers
       digitalWrite(SS, HIGH);             // Set latchPin HIGH
 
       // result = adc->analogSynchronizedRead(A0_PIN, A1_PIN);
@@ -80,8 +80,8 @@ void loop() {
     }
     setCols = setCols >> 1;
   }
-  // serial.update();
-  fps++;
+  serial.update();
+  // fps++;
 }
 
 // This is our packet callback, the buffer is delivered already decoded.
