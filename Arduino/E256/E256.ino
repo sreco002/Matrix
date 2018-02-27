@@ -1,13 +1,6 @@
 // eTextile matrix sensor - E-256 (shield V2.0)
-#include <ADC.h>  // Include the ADC library
-#include <SPI.h>  // Include the new SPI library
-
 #include "E256.h"
 
-ADC *adc = new ADC(); // adc object
-ADC::Sync_result result;
-
-SPISettings settings(16000000, MSBFIRST, SPI_MODE0);
 
 ////////////////////////////////////// SETUP
 void setup() {

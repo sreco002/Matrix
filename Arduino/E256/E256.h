@@ -1,11 +1,12 @@
 #ifndef __E256_H__
 #define __E256_H__
 
-#include <SPI.h>
-#include <PacketSerial.h>
+#include <SPI.h>          // Include the new SPI library
+#include <ADC.h>          // Include the ADC library
+#include <PacketSerial.h> // Include the PacketSerial library
 
 /*
-  PACKET SERIAL : Copyright (c) 2012-2014 Christopher Baker <http://christopherbaker.net>
+  PACKET SERIAL: Copyright (c) 2012-2014 Christopher Baker <http://christopherbaker.net>
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
   in the Software without restriction, including without limitation the rights
@@ -24,6 +25,7 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
 */
+
 PacketSerial serial;
 
 #define  BAUD_RATE            230400
@@ -37,6 +39,11 @@ PacketSerial serial;
 
 #define  A0_PIN               A9  // The output of multiplexerA (SIG pin) is connected to Arduino Analog pin 0
 #define  A1_PIN               A3  // The output of multiplexerB (SIG pin) is connected to Arduino Analog pin 1
+
+ADC *adc = new ADC();             // ADC object
+ADC::Sync_result result;          // 
+
+SPISettings settings(16000000, MSBFIRST, SPI_MODE0);
 
 uint8_t myPacket[ROW_FRAME] = {0}; // Array to store values to transmit
 
