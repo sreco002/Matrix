@@ -124,8 +124,8 @@ void loop() {
         }
       }
       // Set row pin in high-impedance state
-      pinMode(rowPins[row], INPUT);
-      // digitalWrite(rowPins[row], LOW);
+      // pinMode(rowPins[row], INPUT);
+      digitalWrite(rowPins[row], LOW);
     }
     scan = false;
   }
